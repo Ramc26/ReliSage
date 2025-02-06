@@ -300,14 +300,23 @@ Focus on:
 - Impact analysis of changes
 
 Structure:(JUST FOLLOW THE BELOW GIVEN SECTIONS AND STRUCTURE)
-1. Overview of changes
-2. Technical breakdown by category
-    a. New Features (if any)
-    b. Improvements (if any)
-    c. Bug Fixes (if any)
-    d. Other (if any)
-3. Notable code modifications (categorized points)
-4. Files Changed Summary (in markdown table format like below):
+1. Overview of changes(Bold)
+
+2. Commits Analized(make sure each c)(Bold)
+Date of Commit:
+Commit Message:
+Author:
+Commit ID:
+
+3. Technical breakdown by category(Bold)
+New Features (if any)
+Improvements (if any)
+Bug Fixes (if any)
+Other (if any)
+
+4. Notable code modifications (categorized points)(Bold)
+
+5. Files Changed Summary (in markdown table format like below):(Bold)
     | File | Changes | Status | Additions | Deletions |
     |------|---------|--------|-----------|-----------|
 
@@ -327,7 +336,7 @@ Avoid mentioning AI generation in any form.
 if __name__ == "__main__":
     REPO_URL = os.getenv("REPO_URL")
     BRANCH_NAME = os.getenv("BRANCH_NAME")
-    MAX_COMMITS = int(os.getenv("MAX_COMMITS", 5))
+    MAX_COMMITS = int(os.getenv("MAX_COMMITS", 10))
     MAX_MERGE_REQUESTS = int(os.getenv("MAX_MERGE_REQUESTS", 5))
     
     if not REPO_URL or not BRANCH_NAME:
@@ -373,5 +382,5 @@ if __name__ == "__main__":
     print(release_notes)
     
     # Save release notes to a markdown file
-    with open("release_notes.md", "w") as f:
+    with open("release_AI.md", "w") as f:
         f.write(release_notes)
