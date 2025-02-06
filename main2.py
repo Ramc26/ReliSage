@@ -239,12 +239,17 @@ def generate_release_notes(commits, merge_requests):
     - Code changes in diffs
     - File modifications (added/modified/deleted)
     - Commit message patterns
+    - Merge/Pull requests (if available)
     - Impact analysis of changes
 
     Structure:(JUST FOLLOW THE BELOW GIVEN SECTIONS AND STRUCTURE)
     1. Overview of changes
     2. Technical breakdown by category
-    3. Notable code modifications
+        a.New Features(if any)
+        b. Improvements(if any)
+        c. Bug Fixes(if any)
+        d. Other (if any)
+    3. Notable code modifications(categorized points)
     4. Files Changed Summary (in markdown table format like below):
         | File | Changes | Status | Additions | Deletions |
         |------|---------|--------|-----------|-----------|
