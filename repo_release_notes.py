@@ -1,6 +1,6 @@
 import os
 import requests
-from langchain_google_genai import ChatGoogleGenerativeAI
+import ollama 
 from dotenv import load_dotenv
 from urllib.parse import urlparse
 
@@ -282,15 +282,13 @@ def get_gitlab_merge_requests(project_id, branch, max_requests, headers):
 
 
 # ------------------------------
-# Release Notes Generation
+# Release Notes Generation (Using Ollama + llama3.2)
 # ------------------------------
 
 def generate_release_notes(commits, merge_requests):
     """
-    Generate release notes using the ChatGoogleGenerativeAI model.
+    Generate release notes using Ollama with the llama3.2 model.
     """
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.2)
-    
     prompt = f"""Analyze these Git commits and merge requests to generate professional release notes. 
 Focus on:
 - Code changes in diffs
@@ -329,8 +327,15 @@ Merge Requests to analyze:
 Output in markdown with technical depth. Highlight significant code changes.
 Avoid mentioning AI generation in any form.
 """
-    response = llm.invoke(prompt)
-    return response.content
+    # Use Ollama's chat endpoint with the llama3.2 model.
+    response = ollama.chat(
+        model='llama3.2',
+        messages=[{'role': 'user', 'content': prompt}],
+        stream=False
+    )
+    
+    # The response is a dictionary. We extract the assistant's text content.
+    return response["message"]["content"]
 
 
 if __name__ == "__main__":
