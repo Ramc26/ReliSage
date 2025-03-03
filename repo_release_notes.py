@@ -363,7 +363,10 @@ if __name__ == "__main__":
     elif provider == "gitlab":
         project_id = repo_info["project_id"]
         commits = get_gitlab_commits(project_id, BRANCH_NAME, MAX_COMMITS, headers)
-        merge_requests = get_gitlab_merge_requests(project_id, BRANCH_NAME, MAX_MERGE_REQUESTS, headers)
+        if MAX_MERGE_REQUESTS > 0:
+            merge_requests = get_gitlab_merge_requests(project_id, BRANCH_NAME, MAX_MERGE_REQUESTS, headers)
+        else:
+            merge_requests = []
     
     # Display analyzed commits
     print("\nCommits Analyzed:")
