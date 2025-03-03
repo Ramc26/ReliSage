@@ -337,7 +337,6 @@ Avoid mentioning AI generation in any form.
     # The response is a dictionary. We extract the assistant's text content.
     return response["message"]["content"]
 
-
 if __name__ == "__main__":
     REPO_URL = os.getenv("REPO_URL")
     BRANCH_NAME = os.getenv("BRANCH_NAME")
@@ -376,13 +375,16 @@ if __name__ == "__main__":
         file_list = [f['filename'] for f in commit['files']]
         print(f"  Files: {', '.join(file_list)}\n")
     
-    # Display analyzed merge requests
+    # Display analyzed merge requests (if any)
     print("\nMerge Requests Analyzed:")
-    for mr in merge_requests:
-        print(f"- [!{mr['id']}] {mr['title']}")
-        print(f"  By {mr['author']} on {mr['merged_at']}")
-        file_list = [f['filename'] for f in mr['files']]
-        print(f"  Files: {', '.join(file_list)}\n")
+    if merge_requests:
+        for mr in merge_requests:
+            print(f"- [!{mr['id']}] {mr['title']}")
+            print(f"  By {mr['author']} on {mr['merged_at']}")
+            file_list = [f['filename'] for f in mr['files']]
+            print(f"  Files: {', '.join(file_list)}\n")
+    else:
+        print("No merge requests found or configured to be skipped.")
     
     # Generate and display release notes
     release_notes = generate_release_notes(commits, merge_requests)
